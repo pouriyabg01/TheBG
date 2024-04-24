@@ -69,7 +69,7 @@ class ProfileController extends Controller
 
         $file = $request->file('avatar');
 
-        $fileName = $request->input('name') . '_avatar_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $fileName = $request->user('customer')->id . uniqid() . '.' . $file->getClientOriginalExtension();
 
         $avatarPath = $file->storeAs('avatars', $fileName, 'public');
 

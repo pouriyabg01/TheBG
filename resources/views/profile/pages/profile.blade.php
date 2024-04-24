@@ -39,34 +39,44 @@
     @csrf
     @method('patch')
     <div class="bg-secondary rounded-3 p-4 mb-4">
-        @if($customer->avatar)
             <div class="d-flex align-items-center">
-                <img id="avatarPreview" class="rounded" src="{{ asset('storage/' .$customer->avatar) }}" width="90" alt="Customer Avatar">
-                @else
-                    <div class="d-flex align-items-center">
-                        <img id="avatarPreview" class="rounded" src="{{ asset('img/shop/account/banner2.jpg') }}" width="90" alt="Default Avatar">
-                        @endif
+                <img id="avatarPreview" class="rounded" src="{{ $customer->avatar ? asset('storage/' .$customer->avatar) : asset('img/shop/account/banner2.jpg')}}" width="90" alt="Customer Avatar">
                         <div class="ps-3">
                             <button class="btn btn-light btn-shadow btn-sm mb-2" type="button" id="uploadButton">
                                 <i class="ci-loading me-2"></i>Change avatar
                             </button>
+                            <button class="btn btn-danger btn-shadow btn-sm mb-2" type="button" id="cancelButton" style="display: none">
+                                <i class="ci-close me-2"></i>Cancel
+                            </button>
                             <input type="file" id="fileInput" name="avatar" accept="image/*" style="display: none;" />
-
                             <script>
-                                document.getElementById('uploadButton').addEventListener('click', function() {
-                                    document.getElementById('fileInput').click();
+                                const avatarPreview = document.getElementById('avatarPreview');
+                                const uploadButton = document.getElementById('uploadButton');
+                                const fileInput = document.getElementById('fileInput');
+                                const cancelButton = document.getElementById('cancelButton');
+                                const originalSrc = avatarPreview.src;
+
+                                uploadButton.addEventListener('click', function() {
+                                    fileInput.click();
                                 });
 
-                                document.getElementById('fileInput').addEventListener('change', function(event) {
+                                fileInput.addEventListener('change', function(event) {
                                     const files = event.target.files;
                                     if (files.length > 0) {
                                         var fileReader = new FileReader();
                                         fileReader.onload = function(e) {
-                                            var avatarPreview = document.getElementById('avatarPreview');
-                                            avatarPreview.src = e.target.result; // Sets the new image URL as the source for the avatar preview
+                                            avatarPreview.src = e.target.result;
+                                            cancelButton.style.display = 'inline-block';
                                         };
-                                        fileReader.readAsDataURL(files[0]); // Start reading the file as Data URL
+                                        fileReader.readAsDataURL(files[0]);
                                     }
+                                });
+
+                                cancelButton.addEventListener('click', function() {
+                                    // Reset the file input and revert to the original image
+                                    fileInput.value = ''; // Clear the file input
+                                    avatarPreview.src = originalSrc; // Restore the original image
+                                    cancelButton.style.display = 'none'; // Hide the cancel button
                                 });
                             </script>
 
