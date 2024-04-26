@@ -17,7 +17,8 @@
         </button>
     </form>
 </div>
-<!-- Wishlist-->
+<!-- no Wishlist-->
+<h2 class="text-dark mb-0" style="display: none" id="emptyWishlistMessage">You have no wishlist product yet!</h2>
 <!-- Item-->
 @foreach($wishlist as $product)
     <div class="wishlist-item">
@@ -41,4 +42,5 @@
         </div>
     </div>
 @endforeach
+
 @endsection

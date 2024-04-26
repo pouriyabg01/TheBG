@@ -74,9 +74,13 @@ function toggleWishlist(element) {
 
 function updateWishlist(count) {
     const countElement = document.getElementById('headerWishlistCount');
+    const sidebarCount = document.getElementById('sidebarWishlistCount');
 
     const iconClass = count > 0 ? 'ci-heart-filled' : 'ci-heart';
 
+    if (sidebarCount){
+        sidebarCount.innerText = count;
+    }
     countElement.innerHTML = `<i class="headerWishlistIcon ${iconClass} mt-n1"></i> Wishlist (${count})`;
 
 }
@@ -87,6 +91,7 @@ function dellWishlist(element) {
     const route = element.getAttribute('data-route');
     const productId = element.getAttribute('data-product-id');
     const csrfToken = element.getAttribute('data-csrf');
+    const emptyMessage = document.getElementById('emptyWishlistMessage');
     const icons = document.querySelectorAll('.wishlist');
 
 
@@ -100,6 +105,11 @@ function dellWishlist(element) {
     })
         .then(response => response.json())
         .then(data => {
+            if (data.wishlistCount === 0){
+                if (emptyMessage){
+                    emptyMessage.style.display = 'block';
+                }
+            }
             if (data.wishlistCount <= 0 && data.deletedWishlist) {
                 icons.forEach(icon => {
                     icon.classList.remove('ci-heart', 'ci-heart-filled');

@@ -18,7 +18,7 @@
             </div>
             <ul class="list-unstyled mb-0">
                 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account-orders') ? 'active' : '' }} " href="{{ route('account-orders') }}"><i class="ci-bag opacity-60 me-2"></i>Orders<span class="fs-sm text-muted ms-auto">1</span></a></li>
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account-wishlist') ? 'active' : '' }}" href="{{ route('account-wishlist') }}"><i class="ci-heart opacity-60 me-2"></i>Wishlist<span class="fs-sm text-muted ms-auto">{{ $customer->wishlist()->count() }}</span></a></li>
+                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account-wishlist') ? 'active' : '' }}" href="{{ route('account-wishlist') }}"><i class="ci-heart opacity-60 me-2"></i>Wishlist<span class="fs-sm text-muted ms-auto" id="sidebarWishlistCount">{{ $customer->wishlist()->count() }}</span></a></li>
                 <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-tickets.html"><i class="ci-help opacity-60 me-2"></i>Support tickets<span class="fs-sm text-muted ms-auto">1</span></a></li>
             </ul>
             <div class="bg-secondary px-4 py-3">
