@@ -112,9 +112,9 @@
             <hr class="hr-light mb-5">
             <div class="row pb-2">
                 <div class="col-md-6 text-center text-md-start mb-4">
-                    <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="img/whiteTheBG.png" width="117" alt="Cartzilla"></a>
+                    <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="{{ asset('img/whiteTheBG.png') }}" width="117" alt="Cartzilla"></a>
                         <div class="btn-group dropdown disable-autohide">
-                            <button class="btn btn-outline-light border-light btn-sm dropdown-toggle px-2" type="button" data-bs-toggle="dropdown"><img class="me-2" src="img/flags/en.png" width="20" alt="English">Eng / $</button>
+                            <button class="btn btn-outline-light border-light btn-sm dropdown-toggle px-2" type="button" data-bs-toggle="dropdown"><img class="me-2" src="{{ asset('img/flags/en.png') }}" width="20" alt="English">Eng / $</button>
                             <ul class="dropdown-menu my-1">
                                 <li class="dropdown-item">
                                     <select class="form-select form-select-sm">
@@ -124,9 +124,9 @@
                                         <option value="jpy">¥ JPY</option>
                                     </select>
                                 </li>
-                                <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="img/flags/fr.png" width="20" alt="Français">Français</a></li>
-                                <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="img/flags/de.png" width="20" alt="Deutsch">Deutsch</a></li>
-                                <li><a class="dropdown-item" href="#"><img class="me-2" src="img/flags/it.png" width="20" alt="Italiano">Italiano</a></li>
+                                <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="{{ asset('img/flags/fr.png') }}" width="20" alt="Français">Français</a></li>
+                                <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="{{ asset('img/flags/de.png') }}" width="20" alt="Deutsch">Deutsch</a></li>
+                                <li><a class="dropdown-item" href="#"><img class="me-2" src="{{ asset('img/flags/it.png') }}" width="20" alt="Italiano">Italiano</a></li>
                             </ul>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-md-end mb-4">
-                    <div class="mb-3"><a class="btn-social bs-light bs-twitter ms-2 mb-2" href="#"><i class="ci-twitter"></i></a><a class="btn-social bs-light bs-facebook ms-2 mb-2" href="#"><i class="ci-facebook"></i></a><a class="btn-social bs-light bs-instagram ms-2 mb-2" href="#"><i class="ci-instagram"></i></a><a class="btn-social bs-light bs-pinterest ms-2 mb-2" href="#"><i class="ci-pinterest"></i></a><a class="btn-social bs-light bs-youtube ms-2 mb-2" href="#"><i class="ci-youtube"></i></a></div><img class="d-inline-block" src="img/cards-alt.png" width="187" alt="Payment methods">
+                    <div class="mb-3"><a class="btn-social bs-light bs-twitter ms-2 mb-2" href="#"><i class="ci-twitter"></i></a><a class="btn-social bs-light bs-facebook ms-2 mb-2" href="#"><i class="ci-facebook"></i></a><a class="btn-social bs-light bs-instagram ms-2 mb-2" href="#"><i class="ci-instagram"></i></a><a class="btn-social bs-light bs-pinterest ms-2 mb-2" href="#"><i class="ci-pinterest"></i></a><a class="btn-social bs-light bs-youtube ms-2 mb-2" href="#"><i class="ci-youtube"></i></a></div><img class="d-inline-block" src="{{ asset('img/cards-alt.png') }}" width="187" alt="Payment methods">
                 </div>
             </div>
             <div class="pb-4 fs-xs text-light opacity-50 text-center text-md-start">© All rights reserved. Made by <a class="text-light" href="https://createx.studio/" target="_blank" rel="noopener">Createx Studio</a></div>

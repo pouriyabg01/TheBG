@@ -30,7 +30,7 @@
     <link rel="stylesheet" media="screen" href="{{ asset('css/theme.min.css') }}">
     <!-- Google Tag Manager-->
 
-      <script src="{{ asset('js/sweetalert2@11') }}"></script>
+{{--      <script src="{{ asset('js/sweetalert2@11') }}"></script>--}}
 
       <!-- custom css & js file-->
       <script src="{{ asset('js/custom/toggleWishlist.js') }}"></script>
@@ -38,7 +38,7 @@
       <script src="{{ asset('js/custom/review.js') }}"></script>
       <link rel="stylesheet" href="{{ asset('css/custom/style.css') }}">
 
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="{{ asset('js/custom/sweetalert.js') }}"></script>
 
   </head>
   <!-- Body-->
@@ -64,14 +64,14 @@
             <form class="needs-validation tab-pane fade show active" action="{{ route('login') }}" autocomplete="off" novalidate id="signin-tab">
                 @csrf
               <div class="mb-3">
-                <label class="form-label" for="email">Email address</label>
-                <input class="form-control" type="email" id="email" placeholder="enter your email" required>
+                <label class="form-label" for="loginEmail">Email address</label>
+                <input class="form-control" type="email" id="loginEmail" placeholder="enter your email" required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
               </div>
               <div class="mb-3">
-                <label class="form-label" for="password">Password</label>
+                <label class="form-label" for="loginPassword">Password</label>
                 <div class="password-toggle">
-                  <input class="form-control" type="password" id="password" required>
+                  <input class="form-control" type="password" id="loginPassword" required>
                   <label class="password-toggle-btn" aria-label="Show/hide password">
                     <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                   </label>
@@ -123,18 +123,18 @@
     </div>
     <main class="page-wrapper">
 
-        @include('shop.modal.product')
+{{--        @include('shop.modal.product')--}}
 
 
       <!-- Navbar Electronics Store-->
         @include('shop-layout.header.header')
 
 
-    <!-- Page Title-->
+        <!-- Page Title-->
         @yield('address-bar')
 
         <!-- main page wrapper -->
-            @yield('main-content')
+        @yield('main-content')
 
         <div class="container pb-5 mb-2 mb-md-4">
             <div class="row">
@@ -194,7 +194,7 @@
     <script src="{{ asset('vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
 {{--    <script src="vendor/lightgallery.js/dist/js/lightgallery.min.js"></script>--}}
-    <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+{{--    <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>--}}
     <!-- Main theme script-->
     <script src="{{ asset('js/theme.min.js') }}"></script>
   </body>

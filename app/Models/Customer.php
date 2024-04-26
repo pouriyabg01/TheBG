@@ -60,7 +60,9 @@ class Customer extends Authenticatable
 
         static::updated(function ($customer){
             if ($customer->isDirty('avatar')){
-                Storage::delete('storage/' .$customer->avatar);
+                if ($customer->avatar) {
+                    Storage::delete('storage/' . $customer->avatar);
+                }
             }
         });
     }

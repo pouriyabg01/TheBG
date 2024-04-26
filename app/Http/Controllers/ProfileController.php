@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Customer;
+use http\Env\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -26,22 +30,22 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request)
     {
         $user = $request->user('customer');
-        $user->fill($request->validated());
+        $validData = $request->validated();
+        $user->fill($validData);
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
-
+        $avatar = false;
         if ($request->hasFile('avatar')) {
-            $this->saveAvatar($request);
+            $avatar = $this->saveAvatar($request);
         }
 
         $user->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return response()->json(['success' => true, 'avatar' => $avatar]);
     }
 
     /**
@@ -67,20 +71,19 @@ class ProfileController extends Controller
     private function saveAvatar(ProfileUpdateRequest $request)
     {
 
+        $user = $request->user('customer');
         $file = $request->file('avatar');
 
-        $fileName = $request->user('customer')->id . uniqid() . '.' . $file->getClientOriginalExtension();
+        $fileName = $user->id . uniqid() . '.' . $file->getClientOriginalExtension();
 
         $avatarPath = $file->storeAs('avatars', $fileName, 'public');
 
-        if ($request->user('customer')->avatar) {
-            $existingAvatarPath = $request->user('customer')->avatar;
-            if (Storage::disk('public')->exists($existingAvatarPath)) {
-                Storage::disk('public')->delete($existingAvatarPath);
-            }
+        $user->avatar = $avatarPath;
+        if ($avatarPath){
+            return asset('storage/' . $avatarPath);
+        }else {
+            return null;
         }
-
-        $request->user('customer')->avatar = $avatarPath;
 
     }
 }
