@@ -3,7 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Models\Customer;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 
 class AddressFormRequest extends FormRequest
@@ -31,5 +34,12 @@ class AddressFormRequest extends FormRequest
             'postal_code' => ['required' , 'numeric'],
             'address' => ['required' , 'string'],
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'error' => $validator->errors(),
+        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

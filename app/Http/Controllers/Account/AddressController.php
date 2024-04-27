@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use function Sodium\add;
 
 class AddressController extends Controller
 {
@@ -21,7 +22,7 @@ class AddressController extends Controller
     public function index()
     {
         $customer = $this->customer();
-        $addresses = $customer->addresses()->latest()->get();
+        $addresses = $customer->addresses;
         return view('profile.pages.address' , [
             'customer' => $customer,
             'addresses' => $addresses
@@ -36,21 +37,16 @@ class AddressController extends Controller
     {
         $customer = $this->customer();
 
-        $address = $request->validated();
+        $data = $request->validated();
 
-        $status = $customer->addresses()->create($address);
-Log::info($status);
-        if ($status) {
-            if ($request->has('shipping')) {
-                $customer->addresses()->where('primary' , 1)->update(['primary' => 0]);
+        $address = $customer->addresses()->create($data);
 
-                $status->update(['primary' => 1]);
+        $this->changePrimary($request , $address);
 
-                return Redirect::route('checkout-shipping');
-            }else{
-                return Redirect::route('account-address');
-            }
+        if (!$address) {
+            return response()->json(['success' => false]);
         }
+        return response()->json(['success' => true , 'address' => $address]);
 
     }
 
@@ -65,17 +61,25 @@ Log::info($status);
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Address $address)
     {
-        //
+        if ($address) {
+            return response()->json(['data' => $address]);
+        }else{
+            return response()->json(['data' => false] , 404);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Address $address)
     {
-        //
+        $address->update($request->all());
+
+        $this->changePrimary($request , $address);
+
+        return response()->json(['success' => true , 'address' => $address]);
     }
 
     /**
@@ -85,6 +89,15 @@ Log::info($status);
     {
         $address->delete();
 
-        return Redirect::route('account-address')->with('status' , 'address-delete');
+        return response()->json(['deleted' => true]);
+    }
+
+    private function changePrimary($request , $address)
+    {
+        if ($request->primary){
+            $this->customer()->addresses()->where('primary' , true)->update(['primary' => false]);
+            $address->primary = true;
+        }
+        return $address->save();
     }
 }
