@@ -3,13 +3,25 @@
 @section('address1' , 'Shop')
 @section('address2' , 'Cart')
 @section('address3' , 'Your Shopping Cart')
-@section('section-content')
+@if($products->isEmpty())
+    @section('container-content')
+    <div class="bg-white rounded-3 shadow-lg p-4" id="emptyCartMsg">
+        <div class="py-2 px-xl-2">
+            <div class="text-center mb-4 pb-3">
+                <h5 class="align-center">Your cart is empty!</h5>
+                <a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i class="ci-store me-2"></i>Continue shopping</a>
+            </div>
+        </div>
+    </div>
+    @endsection
+@else
+    @section('section-content')
 
+    <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
+        <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i class="ci-arrow-left me-2"></i>Continue shopping</a>
+    </div>
     <!-- List of items-->
-<div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
-    <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i class="ci-arrow-left me-2"></i>Continue shopping</a>
-</div>
-@foreach($products as $product)
+    @foreach($products as $product)
     <!-- Item-->
     <div class="pageCartItem" data-product-id="{{ $product->id }}">
         <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
@@ -30,7 +42,8 @@
     </div>
 @endforeach
 {{--<button class="btn btn-outline-accent d-block w-100 mt-4" type="button"><i class="ci-loading fs-base me-2"></i>Update cart</button>--}}
-@section('sidebar-after')
+
+    @section('sidebar-after')
     <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
         <div class="bg-white rounded-3 shadow-lg p-4">
             <div class="py-2 px-xl-2">
@@ -102,6 +115,7 @@
         </div>
     </aside>
 @endsection
-@endsection
+    @endsection
+@endif
 
 

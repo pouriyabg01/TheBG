@@ -35,7 +35,7 @@ trait CartTrait
         $productInCart = $customer->cart->contains($product);
 
         if ($productInCart){
-            $customer->cart()->updateExistingPivot($product, ['quantity' => $quantity + $product->pivot_quantity]);
+//            $customer->cart()->updateExistingPivot($product, ['quantity' => $quantity + $product->pivot_quantity]);
             $added = true;
             $inCart = true;
         } else {
@@ -46,7 +46,7 @@ trait CartTrait
         $customer->load('cart' );
 
         return response()->json([
-            'inCar' => $inCart ,
+            'inCart' => $inCart ,
             'added' => $added ,
             'cartItemCount' => $customer->cartItemCount(),
             'cartItemSubTotal' => $customer->cartItemSubTotal()
@@ -54,7 +54,7 @@ trait CartTrait
 
     }
 
-    public function removeFromCart($product)
+    public function removeFromCart(Product $product)
     {
         $customer = Auth::guard('customer')->user();
 

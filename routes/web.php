@@ -26,25 +26,8 @@ use Illuminate\Http\Request;
 //    dd('asd');
 //});
 Route::get('/dashboard', function (Request $request) {
-    $product = \App\Models\Products\Product::with('specifications.key.type')->find('1');
-//    dd($product->groupedSpecByType());
-    foreach ($product->groupedSpecByType() as $item => $value){
-        echo $item . ":";
-        foreach ($value as $spec){
-            echo "<br>";
-            echo $spec->key->key .'=';
-            echo $spec->value;
-        }
-        echo "<br>";
-    }
-//    foreach ($product->groupedSpecByTye() as $type => $spec){
-//        echo $type.":";
-//        foreach ($spec as $ketValue){
-//            echo $ketValue->key->key .'-';
-//            echo $ketValue->value;
-//            echo "<br>";
-//        }
-//    }
+    $user = auth('customer')->user();
+    dd($user->cart()->detach(3));
 });
 
 
