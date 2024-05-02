@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Models\Address;
+use App\Models\Order;
 use App\Models\Products\Product;
 use App\Traits\CartTrait;
 use Illuminate\Http\Request;
@@ -16,6 +18,7 @@ class CheckoutController extends Controller
     {
         return Auth::guard('customer')->user();
     }
+
     public function cart()
     {
         $customer = $this->customer();
@@ -36,11 +39,22 @@ class CheckoutController extends Controller
 
     public function detail()
     {
+        if (session()->exists('order-address')){
+            session()->forget('order-address');
+        }
         return view('profile.checkout.detail');
     }
 
     public function shipping()
     {
+        if (session()->exists('order-address')){
+            return view('profile.checkout.shipping');
+        }
+        $primaryAddress = $this->customer()->primaryAddress();
+
+        if ($primaryAddress) {
+            session(['order-address' => $primaryAddress]);
+        }
         return view('profile.checkout.shipping');
     }
 
@@ -48,12 +62,20 @@ class CheckoutController extends Controller
     {
         $customer = auth('customer')->user();
         $cartItem = $customer->cart;
-        return view('profile.checkout.review' , compact('cartItem'));
+        $orderAddress = session('order-address');
+        return view('profile.checkout.review' , compact('cartItem' , 'orderAddress'));
     }
 
+    public function payment()
+    {
+        return view('profile.checkout.payment');
+    }
     public function complete()
     {
-
-        return view('profile.checkout.complete');
+        $orderController = app()->make(OrderController::class);
+        $order = $orderController->store();
+        if ($order) {
+            return view('profile.checkout.complete' , compact('order'));
+        }
     }
 }

@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('orderss', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Address::class)->constrained()->cascadeOnDelete();
-            $table->unique(['customer_id' , 'address_id']);
             $table->longText('note')->nullable();
             $table->bigInteger('number');
             $table->enum('status' , ['completed' , 'pending' , 'delivered' , 'canceled' , 'in-process']);

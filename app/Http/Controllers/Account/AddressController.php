@@ -43,9 +43,16 @@ class AddressController extends Controller
 
         $this->changePrimary($request , $address);
 
+
         if (!$address) {
             return response()->json(['success' => false]);
         }
+
+        if ($request->has('shipping')){
+            session(['order-address' => $address]);
+            session()->save();
+        }
+
         return response()->json(['success' => true , 'address' => $address]);
 
     }

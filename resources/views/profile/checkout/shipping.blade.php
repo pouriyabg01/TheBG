@@ -4,7 +4,7 @@
 @section('address2' , 'Checkout')
 @section('address3' , 'shipping')
 @section('checkout-prev-route' , 'detail')
-@section('checkout-next-route' , 'review')
+@section('checkout-next-route' , 'payment')
 @section('checkout-steps')
     @include('profile.checkout.layout.step')
 @endsection

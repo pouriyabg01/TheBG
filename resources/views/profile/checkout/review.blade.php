@@ -3,7 +3,7 @@
 @section('address1' , 'Shop')
 @section('address2' , 'Checkout')
 @section('address3' , 'review')
-@section('checkout-prev-route' , 'shipping')
+@section('checkout-prev-route' , 'payment')
 @section('checkout-next-route' , 'complete')
 @section('checkout-steps')
     @include('profile.checkout.layout.step')
@@ -14,9 +14,9 @@
 @foreach($cartItem as $product)
     <!-- Item-->
     <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
-        <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="{{ $product->title }}"><img src="{{ asset('img/shop/cart/02.jpg') }}" width="160" alt="Product"></a>
+        <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="{{ $product->title }}"><img src="{{ asset($product->thumbnail->first()->name) }}" width="160" alt="Product"></a>
             <div class="pt-2">
-                <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">{{ $product->title }}</a></h3>
+                <h3 class="product-title fs-base mb-2"><a href="{{ route('product-show' , $product) }}">{{ $product->title }}</a></h3>
                 <div class="fs-sm"><span class="text-muted me-2">Size:</span>8.5</div>
                 <div class="fs-sm"><span class="text-muted me-2">Color:</span>White &amp; Blue</div>
                 <div class="fs-lg text-accent pt-2">{{ $product->price }}</div>
@@ -35,9 +35,9 @@
         <div class="col-sm-6">
             <h4 class="h6">Shipping to:</h4>
             <ul class="list-unstyled fs-sm">
-                <li><span class="text-muted">Client:&nbsp;</span>Susan Gardner</li>
-                <li><span class="text-muted">Address:&nbsp;</span>44 Shirley Ave. West Chicago, IL 60185, USA</li>
-                <li><span class="text-muted">Phone:&nbsp;</span>+1 (808) 764 554 330</li>
+                <li><span class="text-muted">Client:&nbsp;</span>{{ $orderAddress->name }}</li>
+                <li><span class="text-muted">Address:&nbsp;</span>{{ $orderAddress->address }}</li>
+                <li><span class="text-muted">Phone:&nbsp;</span>{{ $orderAddress->phone }}</li>
             </ul>
         </div>
         <div class="col-sm-6">

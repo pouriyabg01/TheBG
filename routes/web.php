@@ -27,7 +27,8 @@ use Illuminate\Http\Request;
 //});
 Route::get('/dashboard', function (Request $request) {
     $user = auth('customer')->user();
-    dd($user->cart()->detach(3));
+//    $order = $user->orders->first();
+    dd($user->primaryAddress());
 });
 
 
@@ -48,3 +49,4 @@ require __DIR__ . '/account.php';
 require __DIR__ . '/checkout.php';
 require __DIR__ . '/ajax.php';
 require __DIR__ . '/address.php';
+require __DIR__ . '/payment.php';

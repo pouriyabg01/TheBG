@@ -77,6 +77,11 @@ class Customer extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
+    public function primaryAddress()
+    {
+        return $this->addresses()->where('primary' , 1)->first();
+    }
+
     public function wishlist(): belongsToMany
     {
         return $this->belongsToMany(Product::class , 'product_wishlists');
@@ -100,7 +105,6 @@ class Customer extends Authenticatable
             $subtotal += $product->price * $product->pivot->quantity;
         }
         return number_format($subtotal , false , false , ',');
-//        return $subtotal;
     }
 
     public function rates(): hasMany
