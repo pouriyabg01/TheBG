@@ -2,19 +2,19 @@
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
         <h2 class="h3 mb-0 pt-3 me-2">Trending products</h2>
-        <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="{{ route('shop-grid' , ['order' => 'top-rated']) }}">More products<i class="ci-arrow-right ms-1 me-n1"></i></a></div>
+        <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="{{ route('shop-grid') }}">More products<i class="ci-arrow-right ms-1 me-n1"></i></a></div>
     </div>
     <!-- Grid-->
     <div class="row pt-2 mx-n2">
         <!-- Product-->
-        @foreach($products as $product)
+    @foreach($products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                 <div class="card product-card">
-{{--                    Button --}}
-{{--                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="#"><i class="ci-compare me-1"></i>Compare</a>--}}
-{{--                    </div>--}}
+                    {{--                    Button --}}
+                    {{--                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2" href="#"><i class="ci-compare me-1"></i>Compare</a>--}}
+                    {{--                    </div>--}}
                     <a class="card-img-top d-block overflow-hidden" href="{{ route('product-show' , $product) }}">
-                        <img src="{{ $product->thumbnail ? asset($product->thumbnail->first()->name) : asset('img/shop/catalog/65.jpg')}}" alt="Product">
+                        <img src="{{ asset($product->thumbnail_url ? 'storage/' . $product->thumbnail_url : 'img/shop/catalog/65.jpg')}}" alt="Product">
                     </a>
                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ route('product-show' , $product) }}">{{ $product->category->name }}</a>
                         <h3 class="product-title fs-sm"><a href="{{ route('product-show' , $product) }}">{{ $product->title }}</a></h3>

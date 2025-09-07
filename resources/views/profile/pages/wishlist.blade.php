@@ -25,7 +25,7 @@
         <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
             <div class="d-block d-sm-flex align-items-start text-center text-sm-start">
                 <a class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{ route('product-show' , $product) }}" style="width: 10rem;">
-                    <img src="{{ asset($product->thumbnail->first()->name) }}" alt="Product">
+                    <img src="{{ asset('storage/' . $product->thumbnail->first()->name) }}" alt="Product">
                 </a>
                 <div class="pt-2">
                     <h3 class="product-title fs-base mb-2"><a href="{{ route('product-show' , $product) }}">{{ $product->title }}</a></h3>

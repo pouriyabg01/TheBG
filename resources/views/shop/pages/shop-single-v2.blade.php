@@ -17,7 +17,7 @@
                 <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
                     <h1 class="h3 text-light mb-2">{{ $product->title }}</h1>
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('shop-grid' , ['brand' => $product->brand->slug] ) }}">
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('shop-grid' , ['brand' => $product->brand->name] ) }}">
                                 <i class="ci-store"></i>{{ $product->brand->name }}</a>
                         </li>
                     </ol>
@@ -56,7 +56,7 @@
                                             <!-- Main Image Display -->
                                             @foreach($product->images as $image)
                                                 <div class="product-gallery-preview-item{{ $loop->first ? ' active' : '' }}" id="mainImage{{ $loop->iteration }}">
-                                                    <img class="image-zoom" src="{{ asset($image->name) }}" data-zoom="{{ asset( $image->name) }}" alt="Product image">
+                                                    <img class="image-zoom" src="{{ asset('storage/'.$image->name) }}" data-zoom="{{ asset( $image->name) }}" alt="Product image">
                                                     <div class="image-zoom-pane"></div>
                                                 </div>
                                             @endforeach
@@ -65,7 +65,7 @@
                                             <!-- Thumbnails -->
                                             @foreach($product->images as $image)
                                                 <a class="product-gallery-thumblist-item{{ $loop->first ? ' active' : '' }}" href="#mainImage{{ $loop->iteration }}">
-                                                    <img src="{{ asset($image->name) }}" alt="Product thumb">
+                                                    <img src="{{ asset('storage/' . $image->name) }}" alt="Product thumb">
                                                 </a>
                                             @endforeach
                                         </div>
@@ -176,7 +176,7 @@
                         <!-- Tech specs tab-->
                         <div class="tab-pane fade" id="specs" role="tabpanel">
                             <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                                <div class="d-flex align-items-center me-md-3"><img src="{{ asset($product->images->first()->name) }}" width="90" alt="Product thumb">
+                                <div class="d-flex align-items-center me-md-3"><img src="{{ asset($product->images->first() ? 'storage/' . $product->images->first()->name :'ada') }}" width="90" alt="Product thumb">
                                     <div class="ps-3">
                                         <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
                                         <div class="h4 fw-normal text-accent">${{ $product->price }}</div>
@@ -224,7 +224,7 @@
                         <!-- Reviews tab-->
                         <div class="tab-pane fade" id="reviews" role="tabpanel">
                             <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                                <div class="d-flex align-items-center me-md-3"><img src="{{ asset($product->images->first()->name) }}" width="90" alt="Product thumb">
+                                <div class="d-flex align-items-center me-md-3"><img src="{{ asset($product->images->first() ? 'storage/' . $product->images->first()->name :'ada') }}" width="90" alt="Product thumb">
                                     <div class="ps-3">
                                         <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
                                         <div class="h4 fw-normal text-accent">${{ $product->price }}</div>
@@ -407,7 +407,7 @@
                     @foreach($sameCat as $catProduct)
                         <div>
                             <div class="card product-card card-static">
-                                <a class="card-img-top d-block overflow-hidden" href="{{ route('product-show' , $catProduct) }}"><img src="{{ asset($catProduct->images->first()->name) }}" alt="Product"></a>
+                                <a class="card-img-top d-block overflow-hidden" href="{{ route('product-show' , $catProduct) }}"><img src="{{ $catProduct->images->first() ? asset('storage/' . $catProduct->images->first()->name) : asset('img/shop/product/default.png')}}" alt="Product"></a>
                                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ route('product-show' , $catProduct) }}">{{ $catProduct->brand->name }}</a>
                                     <h3 class="product-title fs-sm"><a href="{{ route('product-show' , $catProduct) }}">{{ $catProduct->title }}</a></h3>
                                     <div class="d-flex justify-content-between">

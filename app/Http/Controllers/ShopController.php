@@ -12,34 +12,35 @@ class ShopController extends Controller
     use ShopTrait;
     public function grid(Request $request)
     {
-
         $products = Product::query();
 
-        if($request->category) {
-            $products = $this->categoryProduct($request);
-        }
-
-        if($request->brand) {
-            $products = $this->brandProduct($request);
-        }
-
-        if($request->order === 'top-rated'){
-            $products = $this->trendingProducts();
-        }
-
-        if($request->order === 'latest'){
+        // Apply filters
+        if ($request->filled('category')) {
+            $products = $this->categoryProduct($request->category);
+        } elseif ($request->filled('brand')) {
+            $products = $this->brandProduct($request->brand);
+        } elseif ($request->filled('order')) {
+            $products = match ($request->order) {
+                'top-rated' => $this->trendingProducts(),
+                'latest'    => $this->latestProduct(),
+                default     => $this->latestProduct(),
+            };
+        } else {
             $products = $this->latestProduct();
         }
 
         $count = $products->count();
 
-        $products = $products->paginate(12)->appends($request->query());
+        $products = $products
+            ->with(['thumbnail', 'brand', 'category'])
+            ->paginate(12)
+            ->appends($request->query());
+
         if ($products->isEmpty()) {
-            return abort(404);
+            abort(404);
         }
-        $brand = $products->first()->brand;
-        $category = $products->first()->category;
-        return view('shop.pages.grid' ,compact('products' , 'category' , 'brand' , 'count'));
+
+        return view('shop.pages.grid', compact('products', 'count'));
     }
 
     public function show(Product $product)

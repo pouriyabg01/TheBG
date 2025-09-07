@@ -25,6 +25,7 @@ class ProductCategorySeeder extends Seeder
                 'parent_id' => $parentCategory ? $parentCategory->id : null,
                 'name' => $category,
                 'slug' => 'TBG-cat-' . Str::slug($category),
+                'icon' => 'awd',
                 'image' => null,
                 'description' => 'asdawe'
             ]);

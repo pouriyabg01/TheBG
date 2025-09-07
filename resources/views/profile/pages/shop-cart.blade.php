@@ -5,14 +5,14 @@
 @section('address3' , 'Your Shopping Cart')
 @if($products->isEmpty())
     @section('container-content')
-    <div class="bg-white rounded-3 shadow-lg p-4" id="emptyCartMsg">
-        <div class="py-2 px-xl-2">
-            <div class="text-center mb-4 pb-3">
-                <h5 class="align-center">Your cart is empty!</h5>
-                <a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i class="ci-store me-2"></i>Continue shopping</a>
+        <div class="bg-white rounded-3 shadow-lg p-4" id="emptyCartMsg">
+            <div class="py-2 px-xl-2">
+                <div class="text-center mb-4 pb-3">
+                    <h5 class="align-center">Your cart is empty!</h5>
+                    <a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i class="ci-store me-2"></i>Continue shopping</a>
+                </div>
             </div>
         </div>
-    </div>
     @endsection
 @else
     @section('section-content')
@@ -25,7 +25,7 @@
     <!-- Item-->
     <div class="pageCartItem" data-product-id="{{ $product->id }}">
         <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
-            <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="{{ route('product-show' , $product) }}"><img src="{{ asset($product->thumbnail->first()->name) }}" width="160" alt="Product"></a>
+            <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="{{ route('product-show' , $product) }}"><img src="{{ asset('storage/' . $product->thumbnail_url) }}" width="160" alt="Product"></a>
                 <div class="pt-2">
                     <h3 class="product-title fs-base mb-2"><a href="{{ route('product-show' , $product) }}">{{ $product->title }}</a></h3>
                     <div class="fs-sm"><span class="text-muted me-2">Size:</span>8.5</div>

@@ -87,7 +87,7 @@
                                         <div class="headerCartItem" data-product-id="{{ $product->id }}">
                                             <div class="widget-cart-item pb-2 border-bottom">
                                             <button class="btn-close text-danger" type="button" aria-label="Remove" onclick="dellItemFromCart(this)" data-route="{{ route('remove-cart', $product) }}" data-csrf="{{ csrf_token() }}"><span aria-hidden="true">&times;</span></button>
-                                                <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="{{ route('product-show' , $product) }}"><img src="{{ asset($product->thumbnail->first()->name) }}" width="64" alt="Product"></a>
+                                                <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="{{ route('product-show' , $product) }}"><img src="{{ asset('storage/' . $product->thumbnail_url) }}" width="64" alt="Product"></a>
                                                     <div class="ps-2">
                                                         <h6 class="widget-product-title"><a href="{{ route('product-show' , $product) }}">{{ $product->title }}</a></h6>
                                                         <div class="widget-product-meta"><span class="text-accent me-2">{{ $product->price }}</span><span class="text-muted">x {{ $product->pivot->quantity }}</span></div>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                                     <div class="fs-sm me-2 py-2"><span class="text-muted" >Subtotal:</span>@auth('customer')<span class="text-accent fs-base ms-1" id="cartItemSubTotal">{{ $customer->cartItemSubTotal() }}@endauth</span></div><a class="btn btn-outline-secondary btn-sm" href="{{ route('checkout-cart') }}">Expand cart<i class="ci-arrow-right ms-1 me-n1"></i></a>
-                                </div><a class="btn btn-primary btn-sm d-block w-100" href="{{ route('checkout-detail') }}"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+                                </div><a class="btn btn-primary btn-sm d-block w-100" href="{{ route('checkout-cart') }}"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
                             </div>
                         </div>
                         @endif
@@ -157,7 +157,7 @@
                                             <!-- Column for Marketing Content -->
                                                 <div class="mega-dropdown-column d-none d-lg-block py-4 text-center">
                                                     <a class="d-block mb-2" href="#">
-                                                        <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+                                                        <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}">
                                                     </a>
                                                     <div class="fs-sm mb-3">Starting from <span class='fw-medium'>${{ $category->products->min('price')}}</span></div>
                                                     <a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>

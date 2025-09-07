@@ -23,7 +23,7 @@
                         <th class="text-center px-4 pb-4">
                             <a class="btn btn-sm d-block w-100 text-danger mb-2" href="#"><i class="ci-trash me-1"></i>Remove</a>
                             <a class="d-inline-block mb-3" href="{{ route('product-show', $product) }}">
-                                <img src="{{ asset($product->thumbnail->first()->name) }}" width="80" alt="{{ $product->title }}">
+                                <img src="{{ asset('storage/' . $product->thumbnail->first()->name) }}" width="80" alt="{{ $product->title }}">
                             </a>
                             <h3 class="product-title fs-sm">
                                 <a href="{{ route('product-show', $product) }}">{{ $product->title }}</a>

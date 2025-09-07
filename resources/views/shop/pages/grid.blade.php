@@ -1,7 +1,7 @@
 @extends('shop-layout.app')
 @section('address-bar' , View::make('shop-layout.address-bar'))
 @section('address1' , 'shop')
-@section('address2' , $category->name)
+{{--@section('address2' , $category->name)--}}
 @section('address3' , $count.' product find')
 
 @section('sidebar-before')
@@ -556,7 +556,8 @@
             <div class="col-md-4 col-sm-6 px-2 mb-4">
                 <div class="card product-card">
 {{--                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button>--}}
-                    <a class="card-img-top d-block overflow-hidden" href="{{ route('product-show' , $product) }}"><img src="{{ asset($product->thumbnail->first()->name) }}" alt="Product"></a>
+                    <a class="card-img-top d-block overflow-hidden" href="{{ route('product-show' , $product) }}">
+                        <img src="{{ $product->thumbnail_url ? asset('storage/' . $product->thumbnail_url) : asset('img/shop/product/default.png')}}" alt="Product"></a>
                     <div class="card-body py-2">
 {{--                        <a class="product-meta d-block fs-xs pb-1" href="#">{{ $product->brand->name }}</a>--}}
                         <h3 class="product-title fs-sm"><a href="{{ route('product-show' , $product) }}">{{ $product->title  }}</a></h3>

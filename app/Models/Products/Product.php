@@ -76,9 +76,14 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function getThumbnailUrlAttribute(){
+        if ($this->thumbnail and $this->thumbnail->name)
+            return $this->thumbnail->name;
+        return null;
+    }
     public function thumbnail()
     {
-        return $this->images()->where('type' ,'=' , 'thumbnail');
+        return $this->hasOne(ProductImage::class)->where('type', 'thumbnail');
     }
 
     public function catalog()
