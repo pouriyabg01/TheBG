@@ -22,16 +22,15 @@ trait ShopTrait
         return $products;
     }
 
-    public function categoryProduct(string $catName)
+    public function categoryProduct(ProductCategory $productCategory)
     {
-        $cat = ProductCategory::where('slug' , $catName)->firstOrFail();
-        return Product::where('product_category_id' , $cat->id);
+        return $productCategory->products();
     }
 
-    public function brandProduct(string $brandName)
+    public function byBrand(string $brand)
     {
-        $brand = Brand::where('name' , $brandName)->firstOrFail();
-        return Product::where('brand_id' , $brand->id);
+        $brand = Brand::where('name' , $brand)->firstOrFail();
+        return $brand->products();
     }
 
     public function latestProduct()

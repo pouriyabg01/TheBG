@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(ShopController::class)->group(function () {
+    Route::get('/shop/products/TBG-brand-{brand}' , 'grid')->name('shop-grid-brand');
+    Route::get('/shop/products/{category}' , 'grid')->name('shop-grid-category');
     Route::get('/shop/products' , 'grid')->name('shop-grid');
     Route::get('/product/{product}' , 'show')->name('product-show');
 //    Route::get('/compare' , 'compare')->name('comparison');

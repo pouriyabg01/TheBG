@@ -46,13 +46,19 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('price')
                             ->required(),
                         Forms\Components\TextInput::make('slug')
+                            ->disabled()
                             ->unique(ignoreRecord: true)
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make('code')
+                            ->disabled()
                             ->unique(ignoreRecord: true)
                             ->default('TBG-pkt-'.random_int(100000 , 999999)),
                         Forms\Components\TextInput::make('offer.percent')
+                            ->label('offer')
+                            ->hint('% percent')
                             ->numeric()
+                            ->minValue('0.1')
+                            ->maxValue('100')
                             ->nullable()
                     ])
                     ->columnSpan(1),

@@ -44,6 +44,7 @@ class CategoryResource extends Resource
                             ->columnSpan(1),
                         Forms\Components\TextInput::make('slug')
                             ->default('TBG-cat-')
+                            ->disabled()
                             ->unique(ignoreRecord: true)
                             ->extraInputAttributes(['readonly' => true])
                             ->columnSpan(1),
@@ -59,7 +60,10 @@ class CategoryResource extends Resource
                     ->rows(3)
                     ->columnSpan(1),
                 Forms\Components\FileUpload::make('image')
-                    ->columnSpan(1),
+                    ->columnSpan(1)
+                    ->image()
+                    ->imageCropAspectRatio('1:1')
+                    ->directory('shop/category/'),
 
             ]);
     }

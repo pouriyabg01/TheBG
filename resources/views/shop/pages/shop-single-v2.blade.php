@@ -8,7 +8,7 @@
                         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
                             <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('home') }}"><i class="ci-home"></i>Home</a></li>
                             @foreach($product->category->getAllParents() as $parent)
-                                <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop-grid' , ['category' => $parent] ) }}">{{ $parent->name }}</a></li>
+                                <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop-grid-category' , $parent) }}">{{ $parent->name }}</a></li>
                             @endforeach
                             <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ $product->category->name }}</li>
                         </ol>
@@ -17,7 +17,7 @@
                 <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
                     <h1 class="h3 text-light mb-2">{{ $product->title }}</h1>
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('shop-grid' , ['brand' => $product->brand->name] ) }}">
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('shop-grid-brand' , $product->brand) }}">
                                 <i class="ci-store"></i>{{ $product->brand->name }}</a>
                         </li>
                     </ol>

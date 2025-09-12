@@ -7,6 +7,7 @@
     }
 @endphp
 
+
 <header class="shadow-sm">
     <div class="topbar topbar-dark bg-dark">
         <div class="container">
@@ -118,9 +119,9 @@
                     <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-menu align-middle mt-n1 me-2"></i>Departments</a>
                             <ul class="dropdown-menu">
-                                @foreach($categories as $category)
+                            @foreach($categories as $category)
                                     <li class="dropdown mega-dropdown">
-                                        <a class="dropdown-item dropdown-toggle" href="{{ route('shop-grid' , ['category' => $category]) }}" data-bs-toggle="dropdown">
+                                        <a class="dropdown-item dropdown-toggle" href="{{ route('shop-grid-category' , $category) }}" data-bs-toggle="dropdown">
                                             <i class="ci-{{ $category->icon }} opacity-60 fs-lg mt-n1 me-2"></i>{{ $category->name }}
                                         </a>
                                         <div class="dropdown-menu p-0">
@@ -132,20 +133,20 @@
                                                             <div class="widget widget-links">
                                                                 @foreach($chunk as $child)
                                                                     @if($child->child->count() > 0)
-                                                                        <a class="widget-list-link" style="font-weight: bold; font-size: 1.1em;" href="{{ route('shop-grid' , ['category' => $child]) }}">
+                                                                        <a class="widget-list-link" style="font-weight: bold; font-size: 1.1em;" href="{{ route('shop-grid-category' , $child) }}">
                                                                             {{ $child->name }}▹
                                                                         </a>
                                                                         <ul class="widget-list">
                                                                             @foreach($child->child as $subChild)
                                                                                 <li class="widget-list-item">
-                                                                                    <a class="widget-list-link" href="{{ route('shop-grid' , ['category' => $subChild]) }}">{{ $subChild->name }}</a>
+                                                                                    <a class="widget-list-link" href="{{ route('shop-grid-category' , $subChild) }}">{{ $subChild->name }}</a>
                                                                                 </li>
                                                                             @endforeach
                                                                         </ul>
                                                                     @else
                                                                         <ul class="widget-list">
                                                                             <li class="widget-list-item">
-                                                                                <a class="widget-list-link" href="{{ route('shop-grid' , ['category' => $child]) }}">{{ $child->name }}</a>
+                                                                                <a class="widget-list-link" href="{{ route('shop-grid-category' , $child) }}">{{ $child->name }}</a>
                                                                             </li>
                                                                         </ul>
                                                                     @endif

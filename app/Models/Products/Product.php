@@ -96,4 +96,10 @@ class Product extends Model
         return $this->hasMany(ProductSpecification::class , 'product_id');
     }
 
+    public static function byBrand(Brand $brand)
+    {
+
+    }
+
+
 }

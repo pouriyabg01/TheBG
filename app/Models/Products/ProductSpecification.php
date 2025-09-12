@@ -12,7 +12,7 @@ class ProductSpecification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id' , 'product_specification_key_id' , 'value'];
+    protected $fillable = ['product_id' , 'key_id' , 'value'];
 
     public function product(): belongsTo
     {

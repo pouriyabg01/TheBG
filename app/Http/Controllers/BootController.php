@@ -14,7 +14,7 @@ class BootController extends Controller
     public function configureViewComposer()
     {
         View::composer('shop-layout.header.header', function ($view) {
-            $categories = ProductCategory::with('child')->whereNull('parent_id')->get();
+            $categories = ProductCategory::with(['child' , 'parent'])->whereNull('parent_id')->get();
             $navItems = $this->navItems;
             $view->with(compact('categories' , 'navItems'));
         });

@@ -22,15 +22,12 @@ class ImageRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                //TODO change directory and file name and delete file after deleting row
                 Forms\Components\FileUpload::make('name')
                     ->image()
                     ->imageEditor()
                     ->imageResizeTargetWidth('518')
                     ->imageResizeTargetHeight('484')
-                    ->imageCropAspectRatio(
-                        '1:1',
-                    )
+                    ->imageCropAspectRatio('1:1')
                     ->directory('shop/products/catalog')
                     ->required()
 //                    ->preserveFilenames() Preserving original file names

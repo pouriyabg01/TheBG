@@ -14,7 +14,7 @@ class ProductCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['parent_id' , 'slug' , 'name' , 'image' , 'description'];
+    protected $fillable = ['parent_id' , 'slug' , 'name' , 'image' , 'description'];//add icon
 
     public function getRouteKeyName()
     {

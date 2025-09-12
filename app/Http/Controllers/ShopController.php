@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products\Product;
+use App\Models\Products\ProductCategory;
 use App\Traits\ShopTrait;
 use Illuminate\Http\Request;
 
@@ -10,15 +11,18 @@ class ShopController extends Controller
 {
 
     use ShopTrait;
-    public function grid(Request $request)
-    {
-        $products = Product::query();
 
-        // Apply filters
-        if ($request->filled('category')) {
+
+    public function grid(Request $request , $brand = null , ProductCategory $category = null)
+    {
+        if ($brand){
+            $request->merge(['brand' => $brand]);
+        }
+
+        if ($request->category) {
             $products = $this->categoryProduct($request->category);
         } elseif ($request->filled('brand')) {
-            $products = $this->brandProduct($request->brand);
+            $products = $this->byBrand($request->brand);
         } elseif ($request->filled('order')) {
             $products = match ($request->order) {
                 'top-rated' => $this->trendingProducts(),

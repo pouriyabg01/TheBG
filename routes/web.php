@@ -22,9 +22,7 @@ use Illuminate\Http\Request;
 
 
 
-//Route::get('/dashboard', function (Request $request) {
-//    dd('asd');
-//});
+
 Route::get('/dashboard', function (Request $request) {
     $user = auth('customer')->user();
     dd($user->cart()->detach(3));
